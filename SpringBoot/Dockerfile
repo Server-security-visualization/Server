@@ -1,5 +1,5 @@
 FROM eclipse-temurin:17-jdk-alpine
 
-COPY app.jar app.jar
+WORKDIR /usr/src/app
 
-ENTRYPOINT ["java","-jar","/app.jar"]
+ENTRYPOINT ["/usr/src/app/gradlew","bootRun"]
