@@ -17,3 +17,5 @@ else
         fi
     done < $ip_list
 fi
+
+echo "finish"
