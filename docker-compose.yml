@@ -9,6 +9,25 @@ services:
       - ./SpringBoot:/usr/src/app
     environment:
       - TZ=Asia/Seoul
+    depends_on:
+      - mariadb
+  flask:
+    build: ./Flask
+    image: server_security/flask
+    ports:
+      - 5000:5000
+    volumes:
+      - ./Flask:/usr/src/app
+    environment:
+      - TZ=Asia/Seoul
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
+    depends_on:
+      - mariadb
   mariadb:
     build: ./MariaDB
     image: server_security/mariadb
