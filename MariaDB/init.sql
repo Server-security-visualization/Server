@@ -100,17 +100,26 @@ CREATE TABLE `block_user_table` (
 CREATE TABLE `packet_detection_table` (
 	`idx`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	`detection`	VARCHAR(100)	NOT NULL,
-	`type`	VARCHAR(20)	NOT NULL
+	`type`	VARCHAR(20)	NOT NULL,
+	`packet_idx`	INT	NOT NULL
 );
 
 CREATE TABLE `file_detection_table` (
 	`idx`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	`detection`	VARCHAR(100)	NOT NULL,
-	`type`	VARCHAR(20)	NOT NULL
+	`type`	VARCHAR(20)	NOT NULL,
+	`file_idx`	INT	NOT NULL
 );
 
 CREATE TABLE `auth_table` (
 	`uuid`	VARCHAR(36)	NOT NULL
+);
+
+CREATE TABLE `server_status_table` (
+	`time`	TIMESTAMP	NOT NULL,
+	`cpu`	INT	NOT NULL,
+	`ram`	INT	NOT NULL,
+	`network`	INT	NOT NULL
 );
 
 ALTER TABLE `block_user_table` ADD CONSTRAINT `PK_BLOCK_USER_TABLE` PRIMARY KEY (
@@ -121,17 +130,20 @@ ALTER TABLE `auth_table` ADD CONSTRAINT `PK_AUTH_TABLE` PRIMARY KEY (
 	`uuid`
 );
 
+ALTER TABLE `server_status_table` ADD CONSTRAINT `PK_SERVER_STATUS_TABLE` PRIMARY KEY (
+	`time`
+);
+
 ALTER TABLE `packet_detection_table` ADD CONSTRAINT `FK_packet_table_TO_packet_detection_table_1` FOREIGN KEY (
-	`idx`
+	`packet_idx`
 )
 REFERENCES `packet_table` (
 	`idx`
 );
 
 ALTER TABLE `file_detection_table` ADD CONSTRAINT `FK_file_table_TO_file_detection_table_1` FOREIGN KEY (
-	`idx`
+	`file_idx`
 )
 REFERENCES `file_table` (
 	`idx`
 );
-
