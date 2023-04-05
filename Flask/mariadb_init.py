@@ -97,6 +97,7 @@ class packet_detection_table(db.Model):
     idx = db.Column(db.Integer, primary_key=True, autoincrement=True)
     detection = db.Column(db.String(100), nullable=False)
     type = db.Column(db.String(20), nullable=False)
+    packet_idx = db.Column(db.Integer, nullable=False)
 
 class file_table(db.Model):
     idx = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -108,6 +109,7 @@ class file_detection_table(db.Model):
     idx = db.Column(db.Integer, primary_key=True, autoincrement=True) 
     detection = db.Column(db.String(100), nullable=False)
     type = db.Column(db.String(20), nullable=False)
+    file_idx = db.Column(db.Integer, nullable=False)
 
 class block_user_table(db.Model):
     ip = db.Column(db.String(15), primary_key=True)
