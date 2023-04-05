@@ -7,6 +7,7 @@
 
 ## Directory 구조
 
+```bash
 .
 ├── malware_cnn
 │   ├── assets
@@ -14,3 +15,4 @@
 └── webattack_detection_rf_model
     ├── assets
     └── variables
+```
