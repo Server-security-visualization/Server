@@ -27,7 +27,7 @@ public class TestController {
 
     @GetMapping("/mariadb")
     public BaseResponse<String> dbTest() throws BaseException {
-        System.out.println("Success Server Test");
+        System.out.println("Success MariaDB Test");
         String uuid = testProvider.getUuid();
         return new BaseResponse<>(uuid);
     }
