@@ -25,4 +25,10 @@ public class TestController {
         return new BaseResponse<>("Success Server Test");
     }
 
+    @GetMapping("/mariadb")
+    public BaseResponse<String> dbTest() throws BaseException {
+        System.out.println("Success Server Test");
+        String uuid = testProvider.getUuid();
+        return new BaseResponse<>(uuid);
+    }
 }
