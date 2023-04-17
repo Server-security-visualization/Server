@@ -11,6 +11,10 @@ public enum BaseResponseStatus {
     /** 2000 : Request 오류 **/
     REQUEST_ERROR(false, 2000, "입력값을 확인해주세요."),
 
+    // [POST] /user/login
+    POST_LOGIN_EMPTY_IP(false, 2001, "IP or DOMAIN을 입력해주세요"),
+    POST_LOGIN_EMPTY_PWD(false, 2002, "PASSWORD를 입력해주세요"),
+
     /** 3000 : Response 오류 **/
     RESPONSE_ERROR(false, 3000, "값을 불러오는데 실패하였습니다."),
 
