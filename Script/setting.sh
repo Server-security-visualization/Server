@@ -59,3 +59,15 @@ Convert "MARIADB_PASSWORD" $MARIADB_PASSWORD "../.env"
 Convert "password" $MARIADB_PASSWORD "../Flask/config.ini"
 
 Convert "MARIADB_ROOT_PASSWORD" $MARIADB_ROOT_PASSWORD "../.env"
+
+echo -e "\033[33mAI Model Download \033[0m"
+
+mkdir ../Flask/model/malware_cnn
+
+wget --load-cookies ~/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies ~/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1EJ1vEYWZ9d0LUV0e_OrC0OUBWXnZBP9y' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1EJ1vEYWZ9d0LUV0e_OrC0OUBWXnZBP9y" -O ./malware_cnn.zip && rm -rf ~/cookies.txt && unzip ./malware_cnn.zip -d ../Flask/model/malware_cnn && rm -rf ./malware_cnn.zip
+
+mkdir ../Flask/model/webattack_detection_rf_model
+
+wget --load-cookies ~/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies ~/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1SmXacuskK4MFwloh3HsALnlypggk9jAv' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1SmXacuskK4MFwloh3HsALnlypggk9jAv" -O ./webattack_detection_rf_model.zip && rm -rf ~/cookies.txt && unzip ./webattack_detection_rf_model.zip -d ../Flask/model/webattack_detection_rf_model && rm -rf ./webattack_detection_rf_model.zip
+
+echo -e "\033[33mEND!!\033[0m"
