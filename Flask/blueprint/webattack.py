@@ -28,7 +28,7 @@ def CNN_BiLSTM():
 try:
     thresh = 0.5
     
-    epoch = 30
+    epoch = 10
     checkpoint_path = f"./model/packet_model/model_{epoch}.ckpt"
 
     packet_model = CNN_BiLSTM()
