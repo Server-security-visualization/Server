@@ -11,6 +11,16 @@ echo -e "\033[33m
 
 \033[0m"
 
+Convert_Float() {
+    if [[ $2 =~ ^0\.[0-9]+$ ]]
+    then
+        sed -i "s/^$1.*$/$1 = $2/" $3
+    else
+        echo -e "\n$1 setting Error!"
+        exit 1
+    fi
+}
+
 Convert_Num() {
     if [[ $2 =~ ^[0-9]*$ ]]
     then
@@ -59,6 +69,10 @@ Convert "MARIADB_PASSWORD" $MARIADB_PASSWORD "../.env"
 Convert "password" $MARIADB_PASSWORD "../Flask/config.ini"
 
 Convert "MARIADB_ROOT_PASSWORD" $MARIADB_ROOT_PASSWORD "../.env"
+
+echo -e "\n\033[33mAI Setting \033[0m"
+read -p "AI thresh(0 < thresh < 1) : " AI_THRESH
+Convert_Float "thresh" $AI_THRESH "../Flask/config.ini"
 
 echo -e "\033[33mAI Model Download \033[0m"
 

@@ -1,4 +1,5 @@
 import numpy as np
+import configparser
 import tensorflow as tf
 from PIL import Image
 from flask import Blueprint, request
@@ -26,7 +27,9 @@ def CNN_BiLSTM():
     return model
 
 try:
-    thresh = 0.5
+    config = configparser.ConfigParser()
+    config.read('/usr/src/app/config.ini')
+    thresh = float(config['AI']['thresh'])
     
     epoch = 10
     checkpoint_path = f"./model/packet_model/model_{epoch}.ckpt"
