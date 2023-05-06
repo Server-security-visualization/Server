@@ -147,3 +147,5 @@ ALTER TABLE `file_detection_table` ADD CONSTRAINT `FK_file_table_TO_file_detecti
 REFERENCES `file_table` (
 	`idx`
 );
+
+INSERT INTO auth_table VALUES (UUID());
