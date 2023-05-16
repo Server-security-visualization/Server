@@ -106,6 +106,7 @@ CREATE TABLE `packet_detection_table` (
 
 CREATE TABLE `file_detection_table` (
 	`idx`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`img`	MEDIUMBLOB	NOT NULL,
 	`detection`	VARCHAR(100)	NOT NULL,
 	`type`	VARCHAR(20)	NOT NULL,
 	`file_idx`	INT	NOT NULL
