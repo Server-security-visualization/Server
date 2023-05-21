@@ -108,7 +108,7 @@ class file_table(db.Model):
 class file_detection_table(db.Model):
     idx = db.Column(db.Integer, primary_key=True, autoincrement=True) 
     img = db.Column(db.LargeBinary, nullable=False)
-    detection = db.Column(db.String(100), nullable=False)
+    detection = db.Column(db.Double, nullable=False)
     type = db.Column(db.String(20), nullable=False)
     file_idx = db.Column(db.Integer, nullable=False)
 
