@@ -15,8 +15,13 @@ public enum BaseResponseStatus {
     POST_LOGIN_EMPTY_IP(false, 2001, "IP or DOMAIN을 입력해주세요"),
     POST_LOGIN_EMPTY_PWD(false, 2002, "PASSWORD를 입력해주세요"),
 
+    // [GET] /malware/detail
+    MALWARE_EMPTY_FILE_ID(false, 2005, "파일인덱스를 입력해주세요."),
+
     /** 3000 : Response 오류 **/
     RESPONSE_ERROR(false, 3000, "값을 불러오는데 실패하였습니다."),
+    MALWARE_CHANGEIMAGE_TYPE_ERROR(false, 3005, "changeImageType에 실패하였습니다."),
+
 
     /** 4000 : Database, Server 오류 **/
     DATABASE_ERROR(false, 4000, "데이터베이스 연결에 실패하였습니다."),
