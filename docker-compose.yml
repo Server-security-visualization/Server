@@ -4,7 +4,7 @@ services:
     build: ./SpringBoot
     image: server_security/spring_boot
     ports:
-      - ${SPRINGBOOT_PORT}:8888
+      - ${SPRINGBOOT_PORT}:8080
     volumes:
       - ./SpringBoot:/usr/src/app
     environment:
