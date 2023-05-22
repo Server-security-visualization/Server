@@ -102,8 +102,10 @@ class packet_detection_table(db.Model):
 class file_table(db.Model):
     idx = db.Column(db.Integer, primary_key=True, autoincrement=True)
     ip = db.Column(db.String(15), nullable=False)
+    filename = db.Column(db.String(100), nullable=False)
     file = db.Column(db.LargeBinary, nullable=False)
     timestamp = db.Column(db.DateTime, nullable=False)
+    
 
 class file_detection_table(db.Model):
     idx = db.Column(db.Integer, primary_key=True, autoincrement=True) 
