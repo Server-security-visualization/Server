@@ -2,7 +2,7 @@ server:
     port: 8080
 
 spring:
-    application:
+  application:
       name: spring
 
     datasource:
@@ -17,3 +17,7 @@ spring:
       show-sql: true
       hibernate:
         ddl-auto: update
+        
+  mvc:
+    cors:
+      allowed-origins: "*"
