@@ -3,6 +3,8 @@ import datetime
 import configparser
 from flask import Blueprint, request
 from mariadb_init import web_log_table, web_log_detection_table, db
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.ensemble import RandomForestClassifier
 
 blue_webattack = Blueprint("webattack", __name__, url_prefix="/webattack")
 
@@ -12,7 +14,8 @@ try:
     http_url_vec = joblib.load('./model/web_log_model/http_url_vec.pkl')
     referer_vec = joblib.load('./model/web_log_model/referer_vec.pkl')
     
-except:
+except Exception as e:
+    print(e)
     print("WebAttack Model Load ERROR!")
     exit(0)
 
