@@ -1,6 +1,7 @@
 import joblib
 import datetime
 import configparser
+import numpy as np
 from flask import Blueprint, request
 from mariadb_init import web_log_table, web_log_detection_table, db
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -9,26 +10,23 @@ from sklearn.ensemble import RandomForestClassifier
 blue_webattack = Blueprint("webattack", __name__, url_prefix="/webattack")
 
 try:
-    weblog_model = joblib.load('./model/web_log_model/RandomForest.pkl')
-    http_query_vec = joblib.load('./model/web_log_model/http_query_vec.pkl')
-    http_url_vec = joblib.load('./model/web_log_model/http_url_vec.pkl')
-    referer_vec = joblib.load('./model/web_log_model/referer_vec.pkl')
+    weblog_model = joblib.load('./model/weblog_model/RandomForest.pkl')
+    http_query_vec = joblib.load('./model/weblog_model/http_query_vec.pkl')
+    http_url_vec = joblib.load('./model/weblog_model/http_url_vec.pkl')
+    referer_vec = joblib.load('./model/weblog_model/referer_vec.pkl')
     
-except Exception as e:
-    print(e)
+except:
     print("WebAttack Model Load ERROR!")
     exit(0)
 
 def preprocessing_log(direction, http_method, http_query, http_version, http_url, http_status, pkt_bytes, rcvd_bytes, sent_bytes, referer):
-    log = []
+    log = np.zeros(2, dtype=np.int64)
     
     # direction
     if(direction == 1):
-        log.append(1)
-        log.append(0)
+        log[0] = 1
     else:
-        log.append(0)
-        log.append(1)
+        log[1] = 1
         
     # http_method
     method_dict = {
@@ -40,21 +38,27 @@ def preprocessing_log(direction, http_method, http_query, http_version, http_url
         'DEBUG':5,
         'TRACE':6
     }
-
-    log.append(method_dict[http_method])
+    method_len = len(method_dict)
+    http_method_arr = np.zeros(method_len, dtype=np.int64)
+    http_method_arr[method_dict[http_method]] = 1
+    log = np.append(log, http_method_arr)
+    
     
     # http_query
-    log += http_query_vec.transform([http_query]).toarray()
+    log = np.append(log, http_query_vec.transform([http_query]).toarray()[0])
 
     # http_version
     version_dict = {
         'HTTP/1.0':0,
         'HTTP/1.1':1
     }
-    log.append(version_dict[http_version])
+    version_len = len(version_dict)
+    http_version_arr = np.zeros(version_len, dtype=np.int64)
+    http_version_arr[version_dict[http_version]] = 1
+    log = np.append(log, http_version_arr)
     
     # http_url
-    log += http_url_vec.transform([http_url]).toarray()
+    log = np.append(log, http_url_vec.transform([http_url]).toarray()[0])
     
     # http_status
     status_dict = {
@@ -68,16 +72,17 @@ def preprocessing_log(direction, http_method, http_query, http_version, http_url
         '500':7,
         '501':8
     }
-    log.append(status_dict[http_status])
+    status_len = len(status_dict)
+    http_status_arr = np.zeros(status_len, dtype=np.int64)
+    http_status_arr[status_dict[str(http_status)]] = 1
+    log = np.append(log, http_status_arr)
     
     # referer
-    log += referer_vec.transform([referer]).toarray()
+    log = np.append(log, referer_vec.transform([referer]).toarray()[0])
     
     # ETC
-    log.append(pkt_bytes)
-    log.append(rcvd_bytes)
-    log.append(sent_bytes)
-    
+    log = np.append(log, np.array([pkt_bytes, rcvd_bytes, sent_bytes], dtype=np.int64))
+
     return log
 
 @blue_webattack.route('/', methods=["POST"], strict_slashes=False)
@@ -108,7 +113,7 @@ def malware():
             else:
                 prediction = 0
             
-            new_log_detection = web_log_detection_table(idx=None, detection=prediction, file_idx=http_url.idx)
+            new_log_detection = web_log_detection_table(idx=None, detection=prediction, web_log_idx=new_log.idx)
             db.session.add(new_log_detection)
             db.session.commit()
             
