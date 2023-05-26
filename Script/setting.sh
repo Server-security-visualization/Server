@@ -82,6 +82,6 @@ wget --load-cookies ~/cookies.txt "https://docs.google.com/uc?export=download&co
 
 mkdir ../Flask/model/weblog_model
 
-wget --load-cookies ~/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies ~/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1ld6sBE9zzPBen-9-uOQZo-ZmMMqcuJ-x' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1ld6sBE9zzPBen-9-uOQZo-ZmMMqcuJ-x" -O ./weblog_model.zip && rm -rf ~/cookies.txt && unzip ./weblog_model.zip -d ../Flask/model/weblog_model && rm -rf ./weblog_model.zip
+wget --load-cookies ~/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies ~/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1lmjIUvHlYo9zctfe2GYIzHtTe0HiwK70' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1lmjIUvHlYo9zctfe2GYIzHtTe0HiwK70" -O ./weblog_model.zip && rm -rf ~/cookies.txt && unzip ./weblog_model.zip -d ../Flask/model/weblog_model && rm -rf ./weblog_model.zip
 
 echo -e "\033[33mEND!!\033[0m"
