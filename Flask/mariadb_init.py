@@ -20,6 +20,7 @@ class web_log_table(db.Model):
     rcvd_bytes = db.Column(db.Integer, nullable=False)
     sent_bytes = db.Column(db.Integer, nullable=False)
     referer = db.Column(db.String(500), nullable=False)
+    timestamp = db.Column(db.DateTime, nullable=False)
 
 class web_log_detection_table(db.Model):
     idx = db.Column(db.Integer, primary_key=True, autoincrement=True)

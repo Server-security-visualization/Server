@@ -9,7 +9,8 @@ CREATE TABLE `web_log_table` (
 	`pkt_bytes`	INT	NOT NULL,
 	`rcvd_bytes`	INT	NOT NULL,
 	`sent_bytes`	INT	NOT NULL,
-	`referer`	VARCHAR(500)	NOT NULL
+	`referer`	VARCHAR(500)	NOT NULL,
+	`timestamp`	DATETIME	NOT NULL
 );
 
 CREATE TABLE `web_log_detection_table` (
