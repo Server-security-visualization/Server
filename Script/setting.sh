@@ -78,10 +78,12 @@ echo -e "\033[33mAI Model Download \033[0m"
 
 mkdir ../Flask/model/malware_model
 
-wget --load-cookies ~/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies ~/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1A8rKA-A4DRJhpkBWN49emUD7uE2lZ6ni' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1A8rKA-A4DRJhpkBWN49emUD7uE2lZ6ni" -O ./malware_model.zip && rm -rf ~/cookies.txt && unzip ./malware_model.zip -d ../Flask/model/malware_model && rm -rf ./malware_model.zip
+https://drive.google.com/file/d/1lTDOynPu04VKhEhDPsK-Z6lWR-9iDVCF/view?usp=sharing
+
+wget --load-cookies ~/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies ~/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1lTDOynPu04VKhEhDPsK-Z6lWR-9iDVCF' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1lTDOynPu04VKhEhDPsK-Z6lWR-9iDVCF" -O ./malware_model.zip && rm -rf ~/cookies.txt && unzip ./malware_model.zip -d ../Flask/model/malware_model && rm -rf ./malware_model.zip
 
 mkdir ../Flask/model/packet_model
 
-wget --load-cookies ~/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies ~/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1pRp7NIysufZ22bICzVbTWcPNJTcmF4O-' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1pRp7NIysufZ22bICzVbTWcPNJTcmF4O-" -O ./packet_model.zip && rm -rf ~/cookies.txt && unzip ./packet_model.zip -d ../Flask/model/packet_model && rm -rf ./packet_model.zip
+wget --load-cookies ~/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies ~/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1aWWdkExBeDIaIFd-0FMzDMisK8eLUA5d' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1aWWdkExBeDIaIFd-0FMzDMisK8eLUA5d" -O ./weblog_model.zip && rm -rf ~/cookies.txt && unzip ./weblog_model.zip -d ../Flask/model/weblog_model && rm -rf ./weblog_model.zip
 
 echo -e "\033[33mEND!!\033[0m"
