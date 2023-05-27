@@ -2,6 +2,7 @@ package com.dca.spring.src.weblog;
 
 import com.dca.spring.config.BaseException;
 import com.dca.spring.config.BaseResponse;
+import com.dca.spring.src.malware.model.MalListRes;
 import com.dca.spring.src.weblog.*;
 import com.dca.spring.src.weblog.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/block")
+@RequestMapping("/webLog")
 
 public class WebLogController {
     private final WebLogProvider webLogProvider;
@@ -20,5 +21,20 @@ public class WebLogController {
     public WebLogController(WebLogProvider webLogProvider, WebLogService webLogService) {
         this.webLogProvider = webLogProvider;
         this.webLogService = webLogService;
+    }
+
+    /** WebLog List 조회
+     * [GET]
+     * /webLog/list
+     **/
+    @GetMapping("/list")
+    public BaseResponse<WebLogListRes> WebLogList(){
+        try{
+            WebLogListRes webLogListRes = webLogProvider.WebLogListPro();
+            return new BaseResponse<>(webLogListRes);
+
+        } catch(BaseException exception){
+            return new BaseResponse<>((exception.getStatus()));
+        }
     }
 }
