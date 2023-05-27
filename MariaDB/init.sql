@@ -36,17 +36,15 @@ CREATE TABLE `file_detection_table` (
 );
 
 CREATE TABLE `block_user_table` (
+	`idx`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	`ip`	VARCHAR(15)	NOT NULL,
 	`time`	DATETIME	NOT NULL,
-	`reason`	VARCHAR(15)	NOT NULL
+	`type`	INT	NOT NULL,
+	`info_idx`	INT	NOT NULL
 );
 
 CREATE TABLE `auth_table` (
 	`uuid`	VARCHAR(36)	NOT NULL
-);
-
-ALTER TABLE `block_user_table` ADD CONSTRAINT `PK_BLOCK_USER_TABLE` PRIMARY KEY (
-	`ip`
 );
 
 ALTER TABLE `auth_table` ADD CONSTRAINT `PK_AUTH_TABLE` PRIMARY KEY (

@@ -42,9 +42,11 @@ class file_detection_table(db.Model):
     file_idx = db.Column(db.Integer, nullable=False)
 
 class block_user_table(db.Model):
+    idx = db.Column(db.Integer, primary_key=True, autoincrement=True) 
     ip = db.Column(db.String(15), primary_key=True)
     time = db.Column(db.DateTime, nullable=False)
-    reason = db.Column(db.String(15), nullable=False)
+    type = db.Column(db.Integer, nullable=False)
+    info_idx = db.Column(db.Integer, nullable=False)
     
 class auth_table(db.Model):
     uuid = db.Column(db.String(36), primary_key=True)
