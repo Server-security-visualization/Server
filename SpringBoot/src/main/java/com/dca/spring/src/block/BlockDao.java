@@ -17,4 +17,19 @@ public class BlockDao {
     public void setDataSource(DataSource dataSource){
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
+
+    /** IP 차단 **/
+    public int BlockIpDao(BlockReq blockReq){
+        String postBlockIpQuery = "insert into block_user_table (ip, type, info_idx) VALUES (?,?,?);";
+        Object[] insertBlockIpParams = new Object[]{
+                blockReq.getIp(),
+                blockReq.getType(),
+                blockReq.getInfoIdx()
+        };
+        this.jdbcTemplate.update(postBlockIpQuery,insertBlockIpParams);
+
+        // 추가된 인덱스 조회
+        String lastInsertIdQuery = "select last_insert_id()";
+        return this.jdbcTemplate.queryForObject(lastInsertIdQuery,int.class);
+    }
 }
