@@ -19,4 +19,14 @@ public class BlockProvider {
         this.blockService = blockService;
         this.blockDao = blockDao;
     }
+
+    /** blacklist 조회 **/
+    public BlackListRes BlackListPro() throws BaseException {
+        try{
+            BlackListRes blackListRes = blockDao.BlackListDao();
+            return blackListRes;
+        } catch (Exception exception){
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
 }

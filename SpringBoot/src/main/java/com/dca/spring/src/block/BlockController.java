@@ -37,4 +37,18 @@ public class BlockController {
             return new BaseResponse<>((exception.getStatus()));
         }
     }
+
+    /** blackList 조회
+     * [GET]
+     * /block/blacklist
+     **/
+    @GetMapping("/blacklist")
+    public BaseResponse<BlackListRes> BlackList(){
+        try{
+            BlackListRes blackListRes = blockProvider.BlackListPro();
+            return new BaseResponse<>(blackListRes);
+        } catch(BaseException exception){
+            return new BaseResponse<>((exception.getStatus()));
+        }
+    }
 }

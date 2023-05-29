@@ -3,11 +3,13 @@ package com.dca.spring.src.block;
 import com.dca.spring.src.block.model.*;
 import com.dca.spring.src.block.*;
 import com.dca.spring.config.BaseException;
+import com.dca.spring.src.malware.model.MalList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.util.List;
 
 @Repository
 public class BlockDao {
@@ -31,5 +33,38 @@ public class BlockDao {
         // 추가된 인덱스 조회
         String lastInsertIdQuery = "select last_insert_id()";
         return this.jdbcTemplate.queryForObject(lastInsertIdQuery,int.class);
+    }
+
+    /** blacklist 조회 **/
+    public BlackListRes BlackListDao(){
+        // Weblog Blacklist
+        String getBlockWebListQuery = "" +
+                "select idx as blockIdx, date_format(b.time, '%Y/%m/%d %h:%i') as time, ip as httpUrl\n" +
+                "from block_user_table as b\n" +
+                "where b.type=2\n" +
+                "order by b.time desc;\n";
+
+        List<BlockWebList> blockWebList = this.jdbcTemplate.query(getBlockWebListQuery, // 리스트면 query, 리스트가 아니면 queryForObject
+                (rs,rowNum) -> new BlockWebList(
+                        rs.getInt("blockIdx"),
+                        rs.getString("time"),
+                        rs.getString("httpUrl")
+                ));
+
+        // Malware Blacklist
+        String getBlockMalListQuery = "" +
+                "select idx as blockIdx,date_format(b.time, '%Y/%m/%d %h:%i') as time, ip\n" +
+                "from block_user_table as b\n" +
+                "where b.type=1\n" +
+                "order by b.time desc;";
+
+        List<BlockMalList> blockMalList = this.jdbcTemplate.query(getBlockMalListQuery, // 리스트면 query, 리스트가 아니면 queryForObject
+                (rs,rowNum) -> new BlockMalList(
+                        rs.getInt("blockIdx"),
+                        rs.getString("time"),
+                        rs.getString("ip")
+                ));
+
+        return new BlackListRes(blockWebList, blockMalList);
     }
 }
