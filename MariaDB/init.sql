@@ -38,7 +38,7 @@ CREATE TABLE `file_detection_table` (
 CREATE TABLE `block_user_table` (
 	`idx`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	`ip`	VARCHAR(15)	NOT NULL,
-	`time`	DATETIME	NOT NULL,
+	`time`	DATETIME	NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	`type`	INT	NOT NULL,
 	`info_idx`	INT	NOT NULL
 );
