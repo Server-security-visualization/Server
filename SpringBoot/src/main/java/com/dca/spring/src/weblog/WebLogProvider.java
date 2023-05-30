@@ -33,4 +33,14 @@ public class WebLogProvider {
             throw new BaseException(DATABASE_ERROR);
         }
     }
+
+    /** WebLog 상세보기 **/
+    public WebLogDetailRes WebLogDetailPro(int webLogIdx) throws BaseException {
+        try{
+            WebLogDetailRes webLogDetailRes = webLogDao.WebLogDetailDao(webLogIdx);
+            return webLogDetailRes;
+        }catch (Exception exception){
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
 }

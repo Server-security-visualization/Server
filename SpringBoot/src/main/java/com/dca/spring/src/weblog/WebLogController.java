@@ -37,4 +37,19 @@ public class WebLogController {
             return new BaseResponse<>((exception.getStatus()));
         }
     }
+
+    /** WebLog 상세보기
+     * [GET]
+     * /webLog/detail
+     **/
+    @GetMapping("/detail/{webLogIdx}")
+    public BaseResponse<WebLogDetailRes> WebLogDetail(@PathVariable("webLogIdx") int webLogIdx){
+        try{
+            WebLogDetailRes webLogListRes = webLogProvider.WebLogDetailPro(webLogIdx);
+            return new BaseResponse<>(webLogListRes);
+
+        } catch(BaseException exception){
+            return new BaseResponse<>((exception.getStatus()));
+        }
+    }
 }
