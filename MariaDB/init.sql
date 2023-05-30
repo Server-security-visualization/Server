@@ -1,5 +1,6 @@
 CREATE TABLE `web_log_table` (
 	`idx`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`ip`	VARCHAR(15)	NOT NULL,
 	`direction`	INT	NOT NULL,
 	`http_method`	VARCHAR(10)	NOT NULL,
 	`http_query`	VARCHAR(500)	NOT NULL,
