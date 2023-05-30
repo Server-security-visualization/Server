@@ -88,6 +88,7 @@ def preprocessing_log(direction, http_method, http_query, http_version, http_url
 @blue_webattack.route('/', methods=["POST"], strict_slashes=False)
 def malware():
     if(request.method=="POST"):
+        ip = request.form.get("ip", "")
         direction = request.form.get("direction", -1, type=int)
         http_method = request.form.get("http_method", "")
         http_query = request.form.get("http_query", "")
@@ -99,7 +100,7 @@ def malware():
         sent_bytes = request.form.get("sent_bytes", -1, type=int)
         referer = request.form.get("referer", "")
         
-        if(direction != -1 and http_method != "" and http_query != "" and http_version != "" and http_url != "" and http_status != -1 and pkt_bytes != -1 and rcvd_bytes != -1 and sent_bytes != -1 and referer != ""):
+        if(ip != "" and direction != -1 and http_method != "" and http_query != "" and http_version != "" and http_url != "" and http_status != -1 and pkt_bytes != -1 and rcvd_bytes != -1 and sent_bytes != -1 and referer != ""):
             new_log = web_log_table(idx=None, direction=direction, http_method=http_method, http_query=http_query, http_version=http_version, http_url=http_url, http_status=http_status, pkt_bytes=pkt_bytes, rcvd_bytes=rcvd_bytes, sent_bytes=sent_bytes, referer=referer, timestamp=datetime.datetime.now())
             
             db.session.add(new_log)

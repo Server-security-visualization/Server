@@ -10,6 +10,7 @@ def init_db(app):
 
 class web_log_table(db.Model):
     idx = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    ip = db.Column(db.String(15), nullable=False)
     direction = db.Column(db.Integer, nullable=False)
     http_method = db.Column(db.String(10), nullable=False)
     http_query = db.Column(db.String(500), nullable=False)
