@@ -10,6 +10,7 @@ import lombok.Setter;
 
 public class WebLogList {
     private int webLogIdx;
+    private String ip;
     private String httpMethod;
     private String httpQuery;
     private String httpUrl;

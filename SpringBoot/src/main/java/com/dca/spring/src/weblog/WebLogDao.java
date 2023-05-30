@@ -20,7 +20,7 @@ public class WebLogDao {
     /** WebLog List 조회 **/
     public List<WebLogList> WebLogListDao(){
         String getWebLogListQuery = "" +
-                "select wd.idx as webLogIdx, w.http_method as httpMethod, w.http_query as httpQuery,\n" +
+                "select wd.idx as webLogIdx, w.ip, w.http_method as httpMethod, w.http_query as httpQuery,\n" +
                 "       w.http_url as httpUrl, w.http_status as httpStatus, wd.detection as risk,\n" +
                 "       if(wd.detection >= 0.5, 1, 0) as level,\n" +
                 "       date_format(w.timestamp, '%Y/%m/%d %h:%i') as time\n" +
@@ -31,6 +31,7 @@ public class WebLogDao {
         List<WebLogList> webLogList = this.jdbcTemplate.query(getWebLogListQuery, // 리스트면 query, 리스트가 아니면 queryForObject
                 (rs,rowNum) -> new WebLogList(
                         rs.getInt("webLogIdx"),
+                        rs.getString("ip"),
                         rs.getString("httpMethod"),
                         rs.getString("httpQuery"),
                         rs.getString("httpUrl"),
