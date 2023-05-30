@@ -1,9 +1,6 @@
 package com.dca.spring.src.block;
 
 import com.dca.spring.src.block.model.*;
-import com.dca.spring.src.block.*;
-import com.dca.spring.config.BaseException;
-import com.dca.spring.src.malware.model.MalList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -39,16 +36,16 @@ public class BlockDao {
     public BlackListRes BlackListDao(){
         // Weblog Blacklist
         String getBlockWebListQuery = "" +
-                "select idx as blockIdx, date_format(b.time, '%Y/%m/%d %h:%i') as time, ip as httpUrl\n" +
+                "select idx as blockIdx, date_format(b.time, '%Y/%m/%d %h:%i') as time, ip\n" +
                 "from block_user_table as b\n" +
                 "where b.type=2\n" +
                 "order by b.time desc;\n";
 
-        List<BlockWebList> blockWebList = this.jdbcTemplate.query(getBlockWebListQuery, // 리스트면 query, 리스트가 아니면 queryForObject
-                (rs,rowNum) -> new BlockWebList(
+        List<BlockList> blockWebList = this.jdbcTemplate.query(getBlockWebListQuery, // 리스트면 query, 리스트가 아니면 queryForObject
+                (rs,rowNum) -> new BlockList(
                         rs.getInt("blockIdx"),
                         rs.getString("time"),
-                        rs.getString("httpUrl")
+                        rs.getString("ip")
                 ));
 
         // Malware Blacklist
@@ -58,8 +55,8 @@ public class BlockDao {
                 "where b.type=1\n" +
                 "order by b.time desc;";
 
-        List<BlockMalList> blockMalList = this.jdbcTemplate.query(getBlockMalListQuery, // 리스트면 query, 리스트가 아니면 queryForObject
-                (rs,rowNum) -> new BlockMalList(
+        List<BlockList> blockMalList = this.jdbcTemplate.query(getBlockMalListQuery, // 리스트면 query, 리스트가 아니면 queryForObject
+                (rs,rowNum) -> new BlockList(
                         rs.getInt("blockIdx"),
                         rs.getString("time"),
                         rs.getString("ip")

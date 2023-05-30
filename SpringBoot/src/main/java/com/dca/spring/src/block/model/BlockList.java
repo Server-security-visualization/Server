@@ -8,8 +8,8 @@ import lombok.Setter;
 @Getter
 @Setter
 
-public class BlockWebList {
+public class BlockList {
     private int blockIdx;
     private String time;
-    private String httpUrl;
+    private String ip;
 }
