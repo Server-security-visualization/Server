@@ -63,7 +63,7 @@ public class WebLogController {
      * [Post]
      * /webLog/download
      **/
-    @GetMapping("/download")
+    @PostMapping("/download")
     public ResponseEntity<String> DownloadCSV() throws BaseException {
         List<WebLogInfo> webLogInfoList = webLogProvider.GetWebLogInfo();
 
