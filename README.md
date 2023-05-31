@@ -16,21 +16,10 @@ chmod +x <스크립트이름>
 ./<스크립트이름>
 ```
 
-- setting.sh
-
-`Flask`, `MairaDB`, `SpringBoot` port 설정 및 `MariaDB` 설정
-
-- blacklist.sh
-
-`iptables` 명령어를 이용한 사용자 ip 차단 스크립트
-
-- mariadb_backup.sh
-
-mariadb 데이터 백업 스크립트
-
-- mariadb_scheduling.sh
-
-`mariadb_backup.sh` 스크립트를 이용한 crontab 적용(현재 매주 월요일 0시 0분에 백업으로 설정)
+- setting.sh : `Flask`, `MairaDB`, `SpringBoot` port 설정 및 `MariaDB` 설정
+- blacklist.sh : `iptables` 명령어를 이용한 사용자 ip 차단 스크립트
+- mariadb_backup.sh : mariadb 데이터 백업 스크립트
+- mariadb_scheduling.sh : `mariadb_backup.sh` 스크립트를 이용한 crontab 적용(현재 매주 월요일 0시 0분에 백업으로 설정)
 
 ### Run
 
