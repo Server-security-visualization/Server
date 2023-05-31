@@ -74,7 +74,7 @@ echo -e "\n\033[33mAI Setting \033[0m"
 read -p "AI thresh(0 < thresh < 1) : " AI_THRESH
 Convert_Float "thresh" $AI_THRESH "../Flask/config.ini"
 
-echo -e "\033[33mAI Model Download \033[0m"
+echo -e "\n\033[33mAI Model Download \033[0m"
 
 mkdir ../Flask/model/malware_model
 
