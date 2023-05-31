@@ -43,4 +43,14 @@ public class WebLogProvider {
             throw new BaseException(DATABASE_ERROR);
         }
     }
+
+    /** WebLog CSV 파일 생성 **/
+    public List<WebLogInfo> GetWebLogInfo() throws BaseException {
+        try{
+            List<WebLogInfo> webLogInfoList = webLogDao.GetWebLogInfoDao();
+            return webLogInfoList;
+        } catch (Exception exception){
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
 }
