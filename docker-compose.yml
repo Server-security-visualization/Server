@@ -3,6 +3,7 @@ services:
   spring_boot:
     build: ./SpringBoot
     image: server_security/spring_boot
+    container_name: dca-sprintboot
     ports:
       - ${SPRINGBOOT_PORT}:8080
     volumes:
@@ -14,6 +15,7 @@ services:
   flask:
     build: ./Flask
     image: server_security/flask
+    container_name: dca-flask
     ports:
       - ${FLASK_PORT}:5000
     volumes:
@@ -31,6 +33,7 @@ services:
   mariadb:
     build: ./MariaDB
     image: server_security/mariadb
+    container_name: dca-mariadb
     volumes:
       - ./MariaDB/data:/var/lib/mysql
     ports:
