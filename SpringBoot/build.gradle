@@ -47,6 +47,11 @@ dependencies {
 	// https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api
 	compileOnly group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
 
+	// csv
+	// https://mvnrepository.com/artifact/org.apache.commons/commons-csv
+	implementation group: 'org.apache.commons', name: 'commons-csv', version: '1.10.0'
+
+
 }
 
 //tasks.named('test') {
