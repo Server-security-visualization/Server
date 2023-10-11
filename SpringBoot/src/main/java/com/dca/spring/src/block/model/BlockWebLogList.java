@@ -8,8 +8,14 @@ import lombok.Setter;
 @Getter
 @Setter
 
-public class BlockList {
+public class BlockWebLogList {
     private int blockIdx;
     private String time;
+    private int webLogIdx;
     private String ip;
+    private String httpMethod;
+    private String httpQuery;
+    private String httpUrl;
+    private int httpStatus;
+    private double risk;
 }

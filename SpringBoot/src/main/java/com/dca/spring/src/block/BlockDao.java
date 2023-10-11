@@ -36,30 +36,48 @@ public class BlockDao {
     public BlackListRes BlackListDao(){
         // Weblog Blacklist
         String getBlockWebListQuery = "" +
-                "select idx as blockIdx, date_format(b.time, '%Y/%m/%d %h:%i') as time, ip\n" +
+                "select b.idx as blockIdx, date_format(b.time, '%Y/%m/%d %h:%i') as time,\n" +
+                "       w.idx as webLogIdx, w.ip, w.http_method as httpMethod, w.http_query as httpQuery,\n" +
+                "       w.http_url as httpUrl, w.http_status as httpStatus, wd.detection as risk\n" +
                 "from block_user_table as b\n" +
+                "left join web_log_table as w on b.info_idx = w.idx\n" +
+                "left join web_log_detection_table as wd on w.idx = wd.web_log_idx\n" +
                 "where b.type=2\n" +
-                "order by b.time desc;\n";
+                "order by b.time desc;";
 
-        List<BlockList> blockWebList = this.jdbcTemplate.query(getBlockWebListQuery, // 리스트면 query, 리스트가 아니면 queryForObject
-                (rs,rowNum) -> new BlockList(
+        List<BlockWebLogList> blockWebList = this.jdbcTemplate.query(getBlockWebListQuery, // 리스트면 query, 리스트가 아니면 queryForObject
+                (rs,rowNum) -> new BlockWebLogList(
                         rs.getInt("blockIdx"),
                         rs.getString("time"),
-                        rs.getString("ip")
+                        rs.getInt("webLogIdx"),
+                        rs.getString("ip"),
+                        rs.getString("httpMethod"),
+                        rs.getString("httpQuery"),
+                        rs.getString("httpUrl"),
+                        rs.getInt("httpStatus"),
+                        rs.getDouble("risk")
                 ));
 
         // Malware Blacklist
         String getBlockMalListQuery = "" +
-                "select idx as blockIdx,date_format(b.time, '%Y/%m/%d %h:%i') as time, ip\n" +
+                "select b.idx as blockIdx,date_format(b.time, '%Y/%m/%d %h:%i') as time,\n" +
+                "       fd.file_idx as fileIdx, f.ip, f.file as fileName, fd.detection as risk,\n" +
+                "       if(fd.detection = 0, '정상', fd.type) as malwareType\n" +
                 "from block_user_table as b\n" +
+                "left join file_table as f on f.idx = b.info_idx\n" +
+                "left join file_detection_table as fd on f.idx = fd.file_idx\n" +
                 "where b.type=1\n" +
                 "order by b.time desc;";
 
-        List<BlockList> blockMalList = this.jdbcTemplate.query(getBlockMalListQuery, // 리스트면 query, 리스트가 아니면 queryForObject
-                (rs,rowNum) -> new BlockList(
+        List<BlockMalwareList> blockMalList = this.jdbcTemplate.query(getBlockMalListQuery, // 리스트면 query, 리스트가 아니면 queryForObject
+                (rs,rowNum) -> new BlockMalwareList(
                         rs.getInt("blockIdx"),
                         rs.getString("time"),
-                        rs.getString("ip")
+                        rs.getInt("fileIdx"),
+                        rs.getString("ip"),
+                        rs.getString("fileName"),
+                        rs.getDouble("risk"),
+                        rs.getString("malwareType")
                 ));
 
         return new BlackListRes(blockWebList, blockMalList);

@@ -10,6 +10,6 @@ import java.util.List;
 @Getter
 @Setter
 public class BlackListRes {
-    private List<BlockList> weblogBlacklist;
-    private List<BlockList> malwareBlacklist;
+    private List<BlockWebLogList> weblogBlacklist;
+    private List<BlockMalwareList> malwareBlacklist;
 }
