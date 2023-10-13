@@ -13,6 +13,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -24,6 +29,9 @@ public class WebLogController {
     private final WebLogService webLogService;
 
     @Autowired
+    private SimpMessagingTemplate messagingTemplate;
+
+    @Autowired
     public WebLogController(WebLogProvider webLogProvider, WebLogService webLogService) {
         this.webLogProvider = webLogProvider;
         this.webLogService = webLogService;
@@ -33,10 +41,33 @@ public class WebLogController {
      * [GET]
      * /webLog/list
      **/
+    /*
     @GetMapping("/list")
     public BaseResponse<WebLogListRes> WebLogList(){
         try{
             WebLogListRes webLogListRes = webLogProvider.WebLogListPro();
+            return new BaseResponse<>(webLogListRes);
+
+        } catch(BaseException exception){
+            return new BaseResponse<>((exception.getStatus()));
+        }
+    }
+    */
+
+    /** WebLog List 조회 (웹소켓)
+     * [GET]
+     * /webLog/list
+     **/
+    @GetMapping("/list")
+    public BaseResponse<WebLogListRes> WebLogList(){
+        try{
+            // 웹로그 리스트 조회 및 처리
+            WebLogListRes webLogListRes = webLogProvider.WebLogListPro();
+
+            // 데이터베이스 변경 사항을 웹소켓을 통해 클라이언트에 전송
+            String message = "updated weblog list";
+            messagingTemplate.convertAndSend("/topic/weblog-list", message);
+
             return new BaseResponse<>(webLogListRes);
 
         } catch(BaseException exception){
